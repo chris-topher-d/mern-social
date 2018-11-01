@@ -1,5 +1,8 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const passportJWT = require('passport-jwt');
+const JWTStrategy = passportJWT.Strategy;
+const ExtractJWT = passportJWT.ExtractJwt;
 
 passport.use(new LocalStrategy({
     usernameField: 'email',
@@ -19,3 +22,22 @@ passport.use(new LocalStrategy({
         .catch(err => callback(err));
   }
 ));
+
+// Allows requests with valid tokens only
+passport.use(new JWTStrategy({
+  jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+  secretOrKey: 'your_jwt_secret'
+  },
+  function(jwtPayload, callback) {
+    // Find the user in the db if needed. This functionality may be omitted if you store everything you need in the JWT payload.
+    return UserModel.findOneById(jwtPayload.id)
+      .then(user => {
+        return callback(null, user);
+      })
+      .catch(err => {
+        return callback(err);
+      });
+  }
+));
+
+module.exports = passport;
