@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import { loginUser } from '../../actions/authActions';
 
@@ -29,6 +30,10 @@ class Login extends Component {
   }
 
   render() {
+    if (this.props.auth.isAuthenticated) {
+      return <Redirect to='/dashboard' />;
+    }
+
     return (
       <div id='login-container'>
         <h2>Login Component</h2>
