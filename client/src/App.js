@@ -3,8 +3,10 @@ import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 
+import PrivateRoute from './components/common/PrivateRoute';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
+import Dashboard from './components/dashboard/Dashboard';
 import './main.css';
 
 class App extends Component {
@@ -16,6 +18,9 @@ class App extends Component {
             <h1>MERN Social</h1>
             <Route exact path='/' component={Login} />
             <Route exact path='/register' component={Register} />
+            <Switch>
+              <PrivateRoute exact path='/dashboard' component={Dashboard} />
+            </Switch>
           </div>
         </Router>
       </Provider>
