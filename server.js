@@ -6,12 +6,19 @@ const passport = require('passport');
 const app = express();
 
 // Import routes
-const auth = require('./routes/auth');
 const users = require('./routes/users');
 
 // body-parser middleware
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
+// DB config
+const db = require('./config/keys').mongoURI;
+
+// Connect ot MongoDB
+mongoose.connect(db)
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.log(err));
 
 // Initialize Passport middleware
 app.use(passport.initialize());
@@ -25,8 +32,7 @@ app.get('/', (req, res) => {
 });
 
 // Use routes
-app.use('/auth', auth);
-app.use('/users', passport.authenticate('jwt', {session: false}), users);
+app.use('/users', users);
 
 const port = process.env.PORT || 5000;
 
