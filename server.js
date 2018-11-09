@@ -3,9 +3,6 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 
-// Import passport strategy
-require('./passport');
-
 const app = express();
 
 // Import routes
@@ -15,6 +12,12 @@ const users = require('./routes/users');
 // body-parser middleware
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
+// Initialize Passport middleware
+app.use(passport.initialize());
+
+// Passport config
+require('./config/passport')(passport);
 
 // test route
 app.get('/', (req, res) => {
