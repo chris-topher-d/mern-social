@@ -16,6 +16,20 @@ router.get('/', (req, res) => {
 // @route  POST users/test
 // @desc   Register new user
 // @access Public
+router.post('/login', (req, res) => {
+  UserModel.findOne({ email: req.body.email })
+    .then(user => {
+      if (!user) {
+        return res.status(404).json({email: 'User not found'});
+      } else {
+        console.log(user);
+      }
+    });
+});
+
+// @route  POST users/test
+// @desc   Register new user
+// @access Public
 router.post('/register', (req, res) => {
   UserModel.findOne({ email: req.body.email })
     .then(user => {
@@ -33,14 +47,6 @@ router.post('/register', (req, res) => {
           .catch(err => console.log(err));
       }
     });
-});
-
-// @route GET api/users
-// @desc Tests passport authentication
-// @access Private
-router.get('/profile', (req, res) => {
-  console.log('User profile has been accessed');
-  res.send('User profile has been accessed');
 });
 
 module.exports = router;
