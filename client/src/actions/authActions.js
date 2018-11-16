@@ -5,13 +5,11 @@ import { SET_CURRENT_USER, GET_ERRORS } from './types';
 
 // Login user
 export const loginUser = (userData, history) => dispatch => {
-  console.log(userData, history);
-
   axios.post('/users/login', userData)
     .then(res => {
       // Save to local storage
       const { token } = res.data;
-
+      
       // Set token to local storage
       localStorage.setItem('jwtToken', token);
 
