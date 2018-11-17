@@ -3,7 +3,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const keys = require('../config/keys');
-const passport = require('passport');
+// const passport = require('passport');
 
 // User model
 const UserModel = require('../models/User');
@@ -19,11 +19,8 @@ router.get('/', (req, res) => {
 // @desc   Login user
 // @access Public
 router.post('/login', (req, res) => {
-  // console.log(req.body.email, req.body.password);
-
   UserModel.findOne({ email: req.body.email })
     .then(user => {
-      // console.log(user);
       if (!user) return res.status(404).json({email: 'User not found'});
 
       // Compare provided password with encrypted password
