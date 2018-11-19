@@ -5,6 +5,7 @@ const passport = require('passport');
 
 // Import routes
 const users = require('./routes/users');
+const profile = require('./routes/profile');
 
 const app = express();
 
@@ -28,6 +29,7 @@ require('./config/passport')(passport);
 
 // Use routes
 app.use('/users', users);
+app.use('/profile', profile);
 
 const port = process.env.PORT || 5000;
 
