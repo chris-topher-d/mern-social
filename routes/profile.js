@@ -11,6 +11,6 @@ const UserModel = require('../models/User');
 // @route  GET /profile
 // @desc   Get current user's profile
 // @access Private
-router.get('/', (req, res) => { // Create protected route
+router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => { // Create protected route
   // Search Profile collection
 });
