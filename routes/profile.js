@@ -3,6 +3,8 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require('passport');
 
+// Profile model
+const ProfileModel = require('../models/Profile');
 // User model
 const UserModel = require('../models/User');
 
