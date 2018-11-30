@@ -14,7 +14,7 @@ class Dashboard extends Component {
           <h2>Welcome {user.name}</h2>
         </header>
         <p>Your profile has no information. Please provide some details about yourself.</p>
-        <Link to='/create-profile' className='link-btn'>
+        <Link to='/edit-profile' className='link-btn'>
           Create Profile
         </Link>
       </div>
