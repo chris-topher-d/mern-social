@@ -7,6 +7,7 @@ import PrivateRoute from './components/common/PrivateRoute';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Dashboard from './components/dashboard/Dashboard';
+import EditProfile from './components/profile/EditProfile';
 import './main.css';
 
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
             <Route exact path='/register' component={Register} />
             <Switch>
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
+              <PrivateRoute exact path='/edit-profile' component={EditProfile} />
             </Switch>
           </div>
         </Router>
